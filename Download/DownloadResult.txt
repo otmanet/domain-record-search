@@ -1,0 +1,10 @@
+amazon.com
+amazon.co.uk
+amazon.de
+s3.amazonaws.com
+amazon.co.jp
+aws.amazon.com
+zazzle.com
+waze.com
+amazon.ca
+amazon.fr

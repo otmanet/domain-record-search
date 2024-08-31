@@ -1,0 +1,50 @@
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+}
+.file-input {
+  width: 50%;
+  height: 20%;
+  border: 2px solid;
+  border-style: dotted;
+  padding: 18px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-bottom: 5px;
+  border-radius: 0.9rem;
+}
+.file-input .upload-file{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 50%;
+  height: 20%;
+  outline: none;
+  opacity: 0;
+  z-index: 9999;
+  padding: 18px;
+}
+.file-input:hover{
+  background-color: #9bc1ef;
+  color: #fff;
+}
+.progress {
+  width: 100%;
+  background-color: #f3f3f3;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-top: 20px;
+  height: 30px;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  line-height: 30px;
+  border-radius: 5px;
+}
