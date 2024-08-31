@@ -71,13 +71,3 @@ document
         console.error("Error:", error);
       });
   });
-
-// // Reset the progress bar when the button is clicked again
-// document.getElementById("submitButton").addEventListener("click", function () {
-//   console.log("here");
-
-//   downloadResult.style.display = "none";
-//   progressBar.style.width = "0%";
-//   progressBar.setAttribute("aria-valuenow", 0);
-//   progressBar.innerText = "0%";
-// });
