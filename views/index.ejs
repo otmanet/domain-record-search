@@ -67,20 +67,28 @@
                 </div>
               </div>
               <div class="w-100 d-flex justify-content-center">
-                <input type="text" class="w-95"  name="keyword" class="form-group" required  placeholder="keyword"/>
-                <button type="submit">
-                  <img src="img/search.png" width="15" height="15" alt="">
+                <input
+                  type="text"
+                  class="w-95"
+                  name="keyword"
+                  class="form-group"
+                  required
+                  placeholder="keyword"
+                />
+                <button type="submit" id="submitButton">
+                  <img src="img/search.png" width="15" height="15" alt="" />
                 </button>
               </div>
-
             </form>
           </div>
-          <div class="w-100 d-flex justify-content-center mt-2"  >
-            <div class="w-75" id="downloadResult" >
+          <div class="w-100 d-flex justify-content-center mt-2">
+            <div class="w-75" id="downloadResult">
               <span class="badget bg-success rounded text-white p-1 text-wrap">
                 Download link
               </span>
-              <p class="text-wrap">This is the result of your keyword Click to download :</p>
+              <p class="text-wrap">
+                This is the result of your keyword Click to download :
+              </p>
               <a href="/api/file/download">DownloadResult</a>
             </div>
           </div>

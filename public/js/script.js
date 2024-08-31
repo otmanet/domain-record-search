@@ -45,6 +45,9 @@ document
   .getElementById("fileForm")
   .addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the default form submission
+
+    // hidden downloadResult each  new submission
+    downloadResult.style.display = "none";
     const formData = new FormData(this);
     fetch("/api/file", {
       method: "POST",
@@ -52,14 +55,29 @@ document
     })
       .then((response) => response.json()) // Handle response as JSON or adjust based on your server response
       .then((data) => {
-        downloadResult.style.display = "none";
         // Process the response data here (e.g., update the DOM or show a message)
         console.log("Success:", data);
         if (data.success) {
           downloadResult.style.display = "block";
+          setTimeout(() => {
+            // Reset the progress bar before each new submission
+            progressBar.style.width = "0%";
+            progressBar.setAttribute("aria-valuenow", 0);
+            progressBar.innerText = "0%";
+          }, 1500);
         }
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   });
+
+// // Reset the progress bar when the button is clicked again
+// document.getElementById("submitButton").addEventListener("click", function () {
+//   console.log("here");
+
+//   downloadResult.style.display = "none";
+//   progressBar.style.width = "0%";
+//   progressBar.setAttribute("aria-valuenow", 0);
+//   progressBar.innerText = "0%";
+// });

@@ -51,12 +51,13 @@ const filterDataByKeyword = asyncHandler(async (req, res) => {
   const { keyword } = req.body;
   return new Promise(async (resolve, reject) => {
     let totalLines = await countLine(filePath);
+
     // Once we know the total lines, start processing again to calculate the percentage in real-time
     let processedLines = 0;
+
     // Parse line based on file type
     let lines;
     const emails = [];
-
     // Create an interface for reading data from a readable stream (in this case, a file) line by line
     const readLine = readline.createInterface({
       // Specify the input stream as a file stream created from the provided file path
@@ -99,7 +100,6 @@ const filterDataByKeyword = asyncHandler(async (req, res) => {
         }
       });
       resolve(emails);
-
       return res.status(200).json({
         success: true,
       });
