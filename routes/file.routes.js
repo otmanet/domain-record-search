@@ -4,7 +4,7 @@ const router = require("express").Router();
 const upload = require("../helpers/multer");
 
 const {
-  filterDataByKeyword,
+  domainRecordSearch,
   downloadFileFiltered,
 } = require("../controller/fileController");
 
@@ -14,7 +14,7 @@ router.get("/file", (req, res) => {
 });
 
 // Handle the file upload and filtering on a POST request to /api/file
-router.route("/").post(upload.single("file"), filterDataByKeyword);
+router.route("/").post(upload.single("file"), domainRecordSearch);
 
 // Import the filterFile  function from the fileController module
 router.route("/download").get(upload.single("file"), downloadFileFiltered);
