@@ -26,6 +26,10 @@ let tasks = 0;
 let totalLines = 0;
 
 let numberLineProcess = 0;
+// Number of workers you want to run concurrently
+const maxWorkers = 4;
+
+let queue = [];
 // async function for start stream File :
 async function countLine(filePath) {
   return new Promise((resolve, reject) => {
@@ -65,6 +69,18 @@ const progressFunction = (processedLines) => {
   }
 };
 
+const processWithWorkerPool = (domain, keyword, filePathRemoved) => {
+  return new Promise((resolve) => {
+    // If active workers are less than the maximum, start a new worker
+    if (tasks < maxWorkers) {
+      processDomain(domain, keyword, filePathRemoved, resolve);
+    } else {
+      // Otherwise, queue the task
+      queue.push({ domain, keyword, filePathRemoved, resolve });
+    }
+  });
+};
+
 // function process Domain :
 const processDomain = (domain, keyword, filePathRemoved) => {
   return new Promise((resolve) => {
@@ -83,6 +99,15 @@ const processDomain = (domain, keyword, filePathRemoved) => {
       resolve();
       // Terminate the worker once the task is done
       worker.terminate();
+      // If there are tasks in the queue, process the next one
+      if (queue.length > 0) {
+        const nextTask = queue.shift();
+        processDomain(
+          nextTask.domain,
+          nextTask.keyword,
+          nextTask.filePathRemoved
+        );
+      }
       if (tasks === 0) {
         finalizeResults(filePathRemoved);
         console.log("processing successfully");
@@ -153,7 +178,11 @@ const domainRecordSearch = asyncHandler(async (req, res) => {
         : line;
       const domain = lines.toString().trim();
       // Filter line based on keyword
-      const processingPromise = processDomain(domain, keyword, filePath);
+      const processingPromise = processWithWorkerPool(
+        domain,
+        keyword,
+        filePath
+      );
       // progressFunction(processedLines);
       processingPromises.push(processingPromise);
     });
